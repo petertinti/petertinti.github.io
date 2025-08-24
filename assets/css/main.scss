@@ -1,0 +1,289 @@
+---
+---
+
+// Variables
+$font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+$font-size-base: 14px;
+$font-size-small: 13px;
+$font-size-large: 16px;
+$color-black: #000;
+$color-white: #fff;
+$color-gray-light: #f8f8f8;
+$color-gray-medium: #666;
+$color-gray-dark: #333;
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+$spacing-xl: 4rem;
+$max-width: 1800px;
+$page-padding: 4vw;
+$on-mobile: 767px;
+
+// Reset - minimal and clean
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+}
+
+body {
+  font-family: $font-family-primary;
+  line-height: 1.4;
+  color: $color-black;
+  background-color: $color-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+// Typography - very minimal
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+h1 { 
+  font-size: 24px; // Larger
+  margin-bottom: $spacing-lg;
+}
+h2 { font-size: 20px; } // Larger
+h3 { font-size: 18px; } // Larger
+
+p {
+  margin-bottom: $spacing-md;
+  line-height: 1.5;
+}
+
+a {
+  color: #bbb; // Even lighter gray color
+  text-decoration: underline; // Underlined
+  
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Header - matching the exact PDF layout
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: $spacing-lg 0; // More space from top
+}
+
+.header-container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $page-padding;
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+.site-title {
+  font-size: 32px; // Even larger
+  font-weight: 800; // Extra bold
+  color: $color-black; // Keep black for site title
+  text-decoration: none; // No underline for site title
+  
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: $spacing-md;
+  
+  .nav-link {
+    font-size: 16px; // Smaller than before
+    font-weight: normal;
+    color: $color-black; // Keep black for nav
+    text-decoration: none; // No underline for nav
+    border-bottom: 1px solid transparent; // Transparent border to maintain spacing
+    padding-bottom: 6px; // Consistent padding for all nav items
+    
+    &:hover {
+      opacity: 0.7;
+    }
+    
+    &.active {
+      border-bottom: 1px solid $color-black; // Make border visible for active page
+    }
+  }
+}
+
+// Main content area - centered and clean  
+.main-content {
+  padding-top: 80px; // Account for taller header
+  min-height: calc(100vh - 80px);
+}
+
+.content-container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $page-padding;
+}
+
+// About page content (homepage) - centered and larger text
+.about-content {
+  max-width: 600px;
+  margin: 0 auto; // Center the content block
+  text-align: left; // Keep text left-aligned within the centered block
+  
+  h1 {
+    margin-bottom: $spacing-lg;
+  }
+  
+  p {
+    font-size: 16px; // Larger text
+    line-height: 1.7; // Better line spacing
+    margin-bottom: $spacing-lg; // More space between paragraphs
+  }
+}
+
+// Gallery styles for photo page - clean grid like original
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-md;
+  
+  @media (max-width: $on-mobile) {
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+}
+
+.gallery-item {
+  overflow: hidden;
+  
+  a {
+    display: block;
+  }
+  
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+  }
+  
+  &:hover img {
+    opacity: 0.9;
+  }
+}
+
+.project-title {
+  padding: $spacing-sm 0;
+  font-size: $font-size-base;
+  font-weight: normal;
+  color: $color-black;
+}
+
+// Project page styles
+.project-header {
+  margin-bottom: $spacing-xl;
+}
+
+.project-description {
+  font-size: $font-size-base;
+  color: $color-black;
+  margin-bottom: $spacing-lg;
+}
+
+.project-gallery {
+  margin: $spacing-xl 0;
+  
+  .gallery-item {
+    margin-bottom: $spacing-lg;
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.project-text {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: $font-size-base;
+  line-height: 1.6;
+}
+
+// Contact styles - centered email
+.contact-content {
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; // Take up half the viewport height for vertical centering
+  
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  a {
+    color: $color-black; // Keep email black
+    text-decoration: none; // No underline for email
+    
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+// Footer - matching PDF layout  
+.site-footer {
+  padding: $spacing-lg $page-padding;
+  
+  .footer-container {
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+  
+  .footer-name {
+    font-size: 18px; // Larger
+    font-weight: 800; // Extra bold
+    color: $color-black; // Dark color
+    margin: 0;
+    text-align: left; // Left aligned
+  }
+}
+
+// Responsive design
+@media (max-width: $on-mobile) {
+  .header-container {
+    padding: 0 $spacing-md;
+  }
+  
+  .content-container {
+    padding: $spacing-lg $spacing-md;
+  }
+  
+  .site-nav {
+    gap: $spacing-sm;
+  }
+  
+  .nav-link {
+    font-size: $font-size-small;
+  }
+}

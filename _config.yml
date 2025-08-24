@@ -1,0 +1,40 @@
+# Site settings
+title: peter tinti
+description: Photography and journalism portfolio
+baseurl: ""
+url: "https://petertinti.github.io"
+author:
+  name: Peter Tinti
+  email: your-email@example.com
+
+# Build settings
+markdown: kramdown
+
+sass:
+  load_paths:
+    - css
+
+# Collections
+collections:
+  projects:
+    output: true
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude files
+exclude:
+  - reference/
+  - README.md
+  - LICENSE
+  - Gemfile*
+  - vendor/
