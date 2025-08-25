@@ -99,6 +99,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeBlogSlideshow();
             }
         });
+        
+        // Touch functionality for mobile - close on tap
+        modal.addEventListener('touchend', function(e) {
+            if (e.target === this) {
+                closeBlogSlideshow();
+            }
+        });
     }
 });
 </script>

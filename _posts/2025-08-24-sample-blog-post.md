@@ -2,6 +2,7 @@
 layout: post
 title: "A sample blog post with al-folio styling"
 date: 2025-08-24
+published: false
 description: "This is an example of how blog posts look with the new al-folio inspired styling, including tags, featured images, and rich formatting."
 tags: [photography, travel, sample, design]
 featured_image: "/photography/nature/DSCF5135.jpg"

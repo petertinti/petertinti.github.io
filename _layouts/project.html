@@ -138,4 +138,34 @@ document.getElementById('slideshow-modal').addEventListener('click', function(e)
         closeSlideshow();
     }
 });
+
+// Touch/Swipe functionality for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+const minSwipeDistance = 50; // Minimum distance in pixels to register as swipe
+
+document.getElementById('slideshow-modal').addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.getElementById('slideshow-modal').addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+    
+    if (Math.abs(swipeDistance) < minSwipeDistance) {
+        return; // Not a significant swipe
+    }
+    
+    if (swipeDistance > 0) {
+        // Swipe right = previous image
+        changeSlide(-1);
+    } else {
+        // Swipe left = next image
+        changeSlide(1);
+    }
+}
 </script>
