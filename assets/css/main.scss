@@ -343,6 +343,10 @@ img {
       line-height: 1.2;
       margin-bottom: $spacing-md;
       color: $color-black;
+      
+      @media (max-width: $on-mobile) {
+        font-size: 24px; // Smaller on mobile
+      }
     }
     
     .post-meta {
@@ -586,6 +590,11 @@ body.project .main-content {
     margin-top: $spacing-xl;
     padding-top: $spacing-lg;
     
+    @media (max-width: $on-mobile) {
+      margin-top: $spacing-lg;
+      padding-top: $spacing-md;
+    }
+    
     .prev-essay {
       text-align: left;
       
@@ -597,6 +606,10 @@ body.project .main-content {
         align-items: center;
         gap: 0.5rem;
         
+        @media (max-width: $on-mobile) {
+          font-size: 18px; // Smaller on mobile
+        }
+        
         &:hover {
           opacity: 0.7;
         }
@@ -605,6 +618,10 @@ body.project .main-content {
           font-size: 30px; // Larger arrow
           font-weight: normal;
           line-height: 1;
+          
+          @media (max-width: $on-mobile) {
+            font-size: 24px; // Smaller on mobile
+          }
         }
       }
     }
@@ -621,6 +638,10 @@ body.project .main-content {
         gap: 0.5rem;
         justify-content: flex-end; // Right align
         
+        @media (max-width: $on-mobile) {
+          font-size: 18px; // Smaller on mobile
+        }
+        
         &:hover {
           opacity: 0.7;
         }
@@ -629,6 +650,10 @@ body.project .main-content {
           font-size: 30px; // Larger arrow
           font-weight: normal;
           line-height: 1;
+          
+          @media (max-width: $on-mobile) {
+            font-size: 24px; // Smaller on mobile
+          }
         }
       }
     }
@@ -670,43 +695,7 @@ body.project .main-content {
   }
 }
 
-.project-title {
-  padding: $spacing-sm 0;
-  font-size: $font-size-base;
-  font-weight: normal;
-  color: $color-black;
-}
-
-// Project page styles
-.project-header {
-  margin-bottom: $spacing-xl;
-}
-
-.project-description {
-  font-size: $font-size-base;
-  color: $color-black;
-  margin-bottom: $spacing-lg;
-}
-
-.project-gallery {
-  margin: $spacing-xl 0;
-  
-  .gallery-item {
-    margin-bottom: $spacing-lg;
-    
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-}
-
-.project-text {
-  max-width: 700px;
-  margin: 0 auto;
-  font-size: $font-size-base;
-  line-height: 1.6;
-}
+// Removed duplicate project styles - these are already defined in the .project section above
 
 
 // Footer - matching PDF layout  
@@ -727,22 +716,43 @@ body.project .main-content {
   }
 }
 
-// Responsive design
+// Global Mobile Responsive Styles
 @media (max-width: $on-mobile) {
+  // Header adjustments
   .header-container {
     padding: 0 $spacing-md;
   }
   
-  .content-container {
-    padding: $spacing-lg $spacing-md;
+  .site-title {
+    font-size: 24px; // Smaller on mobile
   }
   
   .site-nav {
     gap: $spacing-sm;
+    
+    .nav-link {
+      font-size: $font-size-small;
+      padding-bottom: 4px; // Less padding on mobile
+    }
   }
   
-  .nav-link {
-    font-size: $font-size-small;
+  // Content adjustments
+  .content-container {
+    padding: $spacing-lg $spacing-md;
+  }
+  
+  .main-content {
+    padding: $spacing-lg $spacing-md;
+  }
+  
+  // Footer adjustments
+  .site-footer {
+    padding: $spacing-md;
+    
+    .footer-name {
+      font-size: 16px;
+      text-align: center; // Center on mobile
+    }
   }
 }
 
