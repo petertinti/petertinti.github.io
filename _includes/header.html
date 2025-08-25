@@ -2,21 +2,23 @@
     <div class="header-container">
         <a href="{{ '/' | relative_url }}" class="site-title">peter tinti</a>
         
-        <!-- Desktop Navigation -->
-        <nav class="site-nav desktop-nav">
-            {% comment %}
-            Blog is temporarily hidden. To re-enable, uncomment the line below:
-            <a href="{{ '/blog' | relative_url }}" class="nav-link{% if page.url contains '/blog' %} active{% endif %}">blog</a>
-            {% endcomment %}
-            <a href="{{ '/photography' | relative_url }}" class="nav-link{% if page.url contains '/photography' %} active{% endif %}">photography</a>
-            <a href="{{ '/contact' | relative_url }}" class="nav-link{% if page.url contains '/contact' %} active{% endif %}">contact</a>
-        </nav>
+        <div class="nav-wrapper">
+            <!-- Desktop Navigation -->
+            <nav class="site-nav desktop-nav">
+                {% comment %}
+                Blog is temporarily hidden. To re-enable, uncomment the line below:
+                <a href="{{ '/blog' | relative_url }}" class="nav-link{% if page.url contains '/blog' %} active{% endif %}">blog</a>
+                {% endcomment %}
+                <a href="{{ '/photography' | relative_url }}" class="nav-link{% if page.url contains '/photography' %} active{% endif %}">photography</a>
+                <a href="{{ '/contact' | relative_url }}" class="nav-link{% if page.url contains '/contact' %} active{% endif %}">contact</a>
+            </nav>
 
-        <!-- Mobile Hamburger Menu -->
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
+            <!-- Mobile Hamburger Menu -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
     </div>
 
     <!-- Mobile Menu Overlay -->
