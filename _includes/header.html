@@ -23,6 +23,7 @@
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay">
+        <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
         <nav class="mobile-nav">
             {% comment %}
             Blog is temporarily hidden. To re-enable, uncomment the line below:
@@ -38,39 +39,47 @@
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileClose = document.querySelector('.mobile-menu-close');
     const body = document.body;
 
+    function closeMobileMenu() {
+        mobileOverlay.classList.remove('active');
+        menuToggle.classList.remove('active');
+        body.style.overflow = '';
+    }
+
+    function openMobileMenu() {
+        mobileOverlay.classList.add('active');
+        menuToggle.classList.add('active');
+        body.style.overflow = 'hidden';
+    }
+
     if (menuToggle && mobileOverlay) {
+        // Toggle menu when hamburger clicked
         menuToggle.addEventListener('click', function() {
             const isOpen = mobileOverlay.classList.contains('active');
-            
             if (isOpen) {
-                mobileOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                body.style.overflow = '';
+                closeMobileMenu();
             } else {
-                mobileOverlay.classList.add('active');
-                menuToggle.classList.add('active');
-                body.style.overflow = 'hidden';
+                openMobileMenu();
             }
         });
+
+        // Close menu when X button clicked
+        if (mobileClose) {
+            mobileClose.addEventListener('click', closeMobileMenu);
+        }
 
         // Close menu when clicking on a link
         const mobileLinks = document.querySelectorAll('.mobile-nav-link');
         mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMobileMenu);
         });
 
         // Close menu when clicking overlay background
         mobileOverlay.addEventListener('click', function(e) {
             if (e.target === mobileOverlay) {
-                mobileOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                body.style.overflow = '';
+                closeMobileMenu();
             }
         });
     }
