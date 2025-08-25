@@ -133,6 +133,22 @@ img {
 .main-content {
   padding-top: 80px; // Account for taller header
   min-height: calc(100vh - 80px);
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $page-padding;
+  
+  // More space from header for home page, blog pages, and photo page
+  &[data-page="home"] {
+    padding-top: 120px; // More space from header
+  }
+  
+  &[data-page="blog"] {
+    padding-top: 120px; // More space from header
+  }
+  
+  &[data-page="photography"] {
+    padding-top: 120px; // More space from header
+  }
 }
 
 .content-container {
@@ -142,8 +158,8 @@ img {
 }
 
 // About page content (homepage) - centered and larger text
-.about-content {
-  max-width: 600px;
+.about-content, .main-content[data-page="home"] {
+  max-width: 720px; // Slightly wider text
   margin: 0 auto; // Center the content block
   text-align: left; // Keep text left-aligned within the centered block
   
@@ -155,6 +171,476 @@ img {
     font-size: 16px; // Larger text
     line-height: 1.7; // Better line spacing
     margin-bottom: $spacing-lg; // More space between paragraphs
+  }
+}
+
+// Contact page - centered email
+.main-content[data-page="contact"] {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px); // Full viewport minus header and extra padding
+  
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  a {
+    color: $color-black; // Keep email black
+    text-decoration: none; // No underline for email
+    
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+// Photography page - gallery grid
+.main-content[data-page="photography"] {
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Exactly 2 columns
+    gap: $spacing-lg;
+    
+    @media (max-width: $on-mobile) {
+      grid-template-columns: 1fr;
+      gap: $spacing-sm;
+    }
+  }
+  
+  .gallery-item {    
+    a {
+      display: block;
+      overflow: hidden; // Moved overflow here to contain the zoom
+      opacity: 1 !important; // Override any inherited opacity
+      
+      &:hover {
+        opacity: 1 !important; // Ensure no opacity change on hover
+      }
+    }
+    
+    img {
+      width: 100%;
+      height: 400px; // Fixed image height
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      opacity: 1 !important; // Override any inherited opacity
+    }
+    
+    &:hover {
+      a {
+        opacity: 1 !important;
+      }
+      
+      img {
+        transform: scale(1.10);
+        opacity: 1 !important; // Ensure no opacity change on hover
+      }
+    }
+  }
+  
+  .project-title {
+    padding: $spacing-md 0;
+    font-size: 20px; // Bigger title
+    font-weight: 700; // Darker/bolder
+    color: $color-black;
+    text-align: left;
+  }
+}
+
+// Blog page styles
+.main-content[data-page="blog"] {
+  max-width: 720px;
+  margin: 0 auto;
+  
+  .blog-post-preview {
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    h2 {
+      margin-bottom: $spacing-sm;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.3;
+      
+      a {
+        color: $color-black;
+        text-decoration: none;
+        
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+    
+    .post-meta {
+      margin-bottom: $spacing-sm;
+      
+      .post-date {
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        margin-right: $spacing-sm;
+      }
+      
+      .post-author {
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        font-style: italic;
+      }
+    }
+    
+    .post-tags {
+      margin-bottom: $spacing-md;
+      
+      .tag {
+        display: inline-block;
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        background-color: #f8f9fa;
+        padding: 2px 8px;
+        border-radius: 12px;
+        margin-right: $spacing-sm;
+        margin-bottom: 4px;
+        border: 1px solid #e9ecef;
+        
+        &:hover {
+          background-color: #e9ecef;
+        }
+      }
+    }
+    
+    .post-description, .post-excerpt {
+      line-height: 1.6;
+      color: $color-gray-dark;
+    }
+    
+    .post-description {
+      font-style: italic;
+      margin-bottom: $spacing-sm;
+    }
+  }
+}
+
+// Individual blog post styles
+.blog-post {
+  max-width: 720px;
+  margin: 0 auto;
+  
+  .post-header {
+    margin-bottom: $spacing-xl;
+    text-align: center;
+    
+    .post-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: $spacing-md;
+      color: $color-black;
+    }
+    
+    .post-meta {
+      margin-bottom: $spacing-md;
+      
+      .post-date {
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        margin-right: $spacing-sm;
+      }
+      
+      .post-author {
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        font-style: italic;
+      }
+    }
+    
+    .post-tags {
+      margin-bottom: $spacing-md;
+      
+      .tag {
+        display: inline-block;
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        background-color: #f8f9fa;
+        padding: 4px 12px;
+        border-radius: 16px;
+        margin-right: $spacing-sm;
+        margin-bottom: 6px;
+        border: 1px solid #e9ecef;
+        
+        &:hover {
+          background-color: #e9ecef;
+        }
+      }
+    }
+    
+    .post-description {
+      font-size: 18px;
+      line-height: 1.5;
+      color: $color-gray-dark;
+      font-style: italic;
+      margin-top: $spacing-md;
+    }
+  }
+  
+  .post-featured-image {
+    margin-bottom: $spacing-xl;
+    text-align: center;
+    
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .post-content {
+    line-height: 1.7;
+    text-align: left;
+    
+    p {
+      margin-bottom: $spacing-lg;
+      font-size: 16px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin: $spacing-xl 0 $spacing-md 0;
+      font-weight: 600;
+      line-height: 1.3;
+      color: $color-black;
+    }
+    
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 20px; }
+    h4 { font-size: 18px; }
+    h5 { font-size: 16px; }
+    h6 { font-size: 14px; }
+    
+    img {
+      max-width: 60%; // Make images smaller - 60% of container width
+      height: auto;
+      margin: $spacing-lg auto;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: block; // Ensure center alignment works
+      cursor: pointer; // Show clickable cursor
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.02); // Subtle zoom on hover
+      }
+      
+      @media (max-width: $on-mobile) {
+        max-width: 90%; // Larger on mobile for readability
+      }
+    }
+    
+    blockquote {
+      border-left: 4px solid #e9ecef;
+      padding-left: $spacing-md;
+      margin: $spacing-lg 0;
+      font-style: italic;
+      color: $color-gray-dark;
+      background-color: #f8f9fa;
+      padding: $spacing-md;
+      border-radius: 4px;
+    }
+    
+    code {
+      background-color: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 14px;
+    }
+    
+    pre {
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      padding: $spacing-md;
+      margin: $spacing-lg 0;
+      overflow-x: auto;
+      
+      code {
+        background-color: transparent;
+        padding: 0;
+      }
+    }
+  }
+  
+  .post-footer {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid #f0f0f0;
+    
+    .back-to-blog a {
+      color: $color-gray-medium;
+      text-decoration: none;
+      font-size: $font-size-small;
+      
+      &:hover {
+        color: $color-black;
+      }
+    }
+  }
+}
+
+// Individual blog post pages (when layout is post)
+body.post .main-content {
+  padding-top: 120px; // More space from header
+}
+
+// Project pages (when layout is project) 
+body.project .main-content {
+  padding-top: 120px; // More space from header
+  padding-left: $spacing-md; // Reduced side margins
+  padding-right: $spacing-md;
+  
+  @media (max-width: $on-mobile) {
+    padding-left: $spacing-sm;
+    padding-right: $spacing-sm;
+  }
+}
+
+// Project page styles
+.project {
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .project-header {
+    margin-bottom: $spacing-xl;
+    text-align: center;
+    
+    .project-title {
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: $spacing-lg;
+    }
+  }
+  
+  .project-content {
+    line-height: 1.7;
+    
+    p {
+      margin-bottom: $spacing-lg;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+  }
+  
+  .project-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm; // Reduced gap between photos
+    margin: $spacing-md 0;
+    grid-auto-rows: 1fr; // Make all rows equal height
+    
+    @media (max-width: $on-mobile) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xs;
+      grid-auto-rows: auto; // Let mobile be auto-height
+    }
+  }
+  
+  .project-image {
+    display: flex;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover; // Crop to fill container while maintaining aspect ratio
+      object-position: center; // Center the crop
+      min-height: 300px; // Ensure minimum size for good presentation
+      cursor: pointer; // Show it's clickable
+      transition: opacity 0.3s ease;
+      
+      &:hover {
+        opacity: 0.9;
+      }
+      
+      @media (max-width: $on-mobile) {
+        height: auto; // Let mobile images be their natural height
+        min-height: 200px;
+      }
+    }
+  }
+  
+  .essay-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    
+    .prev-essay {
+      text-align: left;
+      
+      a {
+        color: $color-black;
+        text-decoration: none;
+        font-size: 22px; // Larger text
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        &:hover {
+          opacity: 0.7;
+        }
+        
+        .arrow {
+          font-size: 30px; // Larger arrow
+          font-weight: normal;
+          line-height: 1;
+        }
+      }
+    }
+    
+    .next-essay {
+      text-align: right;
+      
+      a {
+        color: $color-black;
+        text-decoration: none;
+        font-size: 22px; // Larger text
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: flex-end; // Right align
+        
+        &:hover {
+          opacity: 0.7;
+        }
+        
+        .arrow {
+          font-size: 30px; // Larger arrow
+          font-weight: normal;
+          line-height: 1;
+        }
+      }
+    }
+    
+    // Handle case where only one navigation link exists
+    .prev-essay:only-child {
+      margin-right: auto;
+    }
+    
+    .next-essay:only-child {
+      margin-left: auto;
+    }
   }
 }
 
@@ -181,11 +667,6 @@ img {
     width: 100%;
     height: 300px;
     object-fit: cover;
-    transition: opacity 0.2s ease;
-  }
-  
-  &:hover img {
-    opacity: 0.9;
   }
 }
 
@@ -227,29 +708,6 @@ img {
   line-height: 1.6;
 }
 
-// Contact styles - centered email
-.contact-content {
-  text-align: center;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh; // Take up half the viewport height for vertical centering
-  
-  p {
-    font-size: 16px;
-    margin: 0;
-  }
-  
-  a {
-    color: $color-black; // Keep email black
-    text-decoration: none; // No underline for email
-    
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-}
 
 // Footer - matching PDF layout  
 .site-footer {
@@ -285,5 +743,115 @@ img {
   
   .nav-link {
     font-size: $font-size-small;
+  }
+}
+
+// Slideshow Modal Styles
+.slideshow-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  
+  .slideshow-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slideshow-image {
+    max-width: 90%;
+    max-height: 85%;
+    object-fit: contain;
+    display: block;
+  }
+  
+  .slideshow-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    &.slideshow-prev {
+      left: 20px;
+    }
+    
+    &.slideshow-next {
+      right: 20px;
+    }
+  }
+  
+  .slideshow-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  
+  // Mobile adjustments
+  @media (max-width: $on-mobile) {
+    .slideshow-close {
+      font-size: 30px;
+      top: 15px;
+      right: 20px;
+    }
+    
+    .slideshow-nav {
+      font-size: 24px;
+      padding: 15px 10px;
+      
+      &.slideshow-prev {
+        left: 10px;
+      }
+      
+      &.slideshow-next {
+        right: 10px;
+      }
+    }
+    
+    .slideshow-counter {
+      bottom: 15px;
+      font-size: 14px;
+      padding: 8px 12px;
+    }
   }
 }

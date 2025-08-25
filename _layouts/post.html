@@ -1,0 +1,104 @@
+---
+layout: default
+---
+
+<article class="blog-post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %d, %Y" }}
+      </time>
+      {% if page.author %}
+        <span class="post-author">by {{ page.author }}</span>
+      {% endif %}
+    </div>
+    
+    {% if page.tags and page.tags.size > 0 %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+          <span class="tag">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    {% if page.description %}
+      <p class="post-description">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  {% if page.featured_image %}
+    <div class="post-featured-image">
+      <img src="{{ page.featured_image }}" alt="{{ page.title }}" loading="lazy">
+    </div>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <!-- Blog Post Slideshow Modal -->
+  <div id="blog-slideshow-modal" class="slideshow-modal">
+    <span class="slideshow-close" onclick="closeBlogSlideshow()">&times;</span>
+    <div class="slideshow-container">
+      <img id="blog-slideshow-image" class="slideshow-image" src="" alt="">
+    </div>
+  </div>
+
+  <footer class="post-footer">
+    <div class="back-to-blog">
+      <a href="{{ '/blog' | relative_url }}">&larr; Back to Blog</a>
+    </div>
+  </footer>
+</article>
+
+<script>
+// Blog post slideshow functionality
+function openBlogSlideshow(imageSrc, imageAlt) {
+    const modal = document.getElementById('blog-slideshow-modal');
+    const img = document.getElementById('blog-slideshow-image');
+    
+    img.src = imageSrc;
+    img.alt = imageAlt || '';
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBlogSlideshow() {
+    const modal = document.getElementById('blog-slideshow-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Add click handlers to all images in blog post content when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const blogImages = document.querySelectorAll('.post-content img');
+    
+    blogImages.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
+            openBlogSlideshow(this.src, this.alt);
+        });
+    });
+    
+    // Keyboard navigation for blog slideshow
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('blog-slideshow-modal');
+        if (modal && modal.style.display === 'block') {
+            if (e.key === 'Escape') {
+                closeBlogSlideshow();
+            }
+        }
+    });
+    
+    // Close on background click
+    const modal = document.getElementById('blog-slideshow-modal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBlogSlideshow();
+            }
+        });
+    }
+});
+</script>

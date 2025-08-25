@@ -2,7 +2,8 @@
     <div class="header-container">
         <a href="{{ '/' | relative_url }}" class="site-title">peter tinti</a>
         <nav class="site-nav">
-            <a href="{{ '/photo' | relative_url }}" class="nav-link{% if page.url contains '/photo' %} active{% endif %}">photo</a>
+            <a href="{{ '/blog' | relative_url }}" class="nav-link{% if page.url contains '/blog' %} active{% endif %}">blog</a>
+            <a href="{{ '/photography' | relative_url }}" class="nav-link{% if page.url contains '/photography' %} active{% endif %}">photography</a>
             <a href="{{ '/contact' | relative_url }}" class="nav-link{% if page.url contains '/contact' %} active{% endif %}">contact</a>
         </nav>
     </div>

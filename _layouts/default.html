@@ -12,12 +12,10 @@
     
     {% include header.html %}
     
-    <main class="main-content">
+    <main class="main-content" data-page="{{ page.title | downcase }}">
         {{ content }}
     </main>
     
-    {% include footer.html %}
     
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>

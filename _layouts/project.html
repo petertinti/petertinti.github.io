@@ -3,29 +3,139 @@ layout: default
 ---
 
 <article class="project">
-    <header class="project-header">
-        <h1 class="project-title">{{ page.title }}</h1>
-        {% if page.description %}
-        <p class="project-description">{{ page.description }}</p>
-        {% endif %}
-    </header>
-    
     <div class="project-content">
-        {% if page.images %}
-        <div class="project-gallery">
-            {% for image in page.images %}
-            <div class="gallery-item">
-                <img src="{{ image.url | relative_url }}" alt="{{ image.alt | default: page.title }}" loading="lazy">
-                {% if image.caption %}
-                <p class="image-caption">{{ image.caption }}</p>
+        {{ content }}
+        
+        <div class="project-gallery-grid">
+            {% assign image_files = site.static_files | where_exp: "item", "item.path contains page.url" %}
+            {% for image in image_files %}
+                {% assign ext = image.extname | downcase %}
+                {% if ext == '.jpg' or ext == '.jpeg' or ext == '.png' %}
+                    <div class="project-image">
+                        <img src="{{ image.path }}" alt="{{ page.title }} Photo" loading="lazy" onclick="openSlideshow({{ forloop.index0 }})">
+                    </div>
                 {% endif %}
-            </div>
             {% endfor %}
         </div>
-        {% endif %}
         
-        <div class="project-text">
-            {{ content }}
+        <!-- Slideshow Modal -->
+        <div id="slideshow-modal" class="slideshow-modal">
+            <span class="slideshow-close" onclick="closeSlideshow()">&times;</span>
+            <div class="slideshow-container">
+                <div class="slideshow-nav slideshow-prev" onclick="changeSlide(-1)">&#10094;</div>
+                <img id="slideshow-image" class="slideshow-image" src="" alt="">
+                <div class="slideshow-nav slideshow-next" onclick="changeSlide(1)">&#10095;</div>
+            </div>
+            <div class="slideshow-counter">
+                <span id="slideshow-current">1</span> / <span id="slideshow-total">1</span>
+            </div>
+        </div>
+        
+        <!-- Essay navigation -->
+        {% assign photo_essays = site.pages | where_exp: "page", "page.path contains 'photography/'" | where_exp: "page", "page.name == 'index.md'" | sort: "order" %}
+        
+        <!-- Find previous and next essays by order -->
+        {% assign prev_essay = nil %}
+        {% assign next_essay = nil %}
+        {% for essay in photo_essays %}
+            {% if essay.order < page.order %}
+                {% assign prev_essay = essay %}
+            {% elsif essay.order > page.order and next_essay == nil %}
+                {% assign next_essay = essay %}
+            {% endif %}
+        {% endfor %}
+        
+        <div class="essay-navigation">
+            <!-- Previous essay (left side) -->
+            {% if prev_essay %}
+                <div class="prev-essay">
+                    <a href="{{ prev_essay.url | relative_url }}">
+                        <span class="arrow">‹</span>
+                        <strong>{{ prev_essay.title }}</strong>
+                    </a>
+                </div>
+            {% endif %}
+            
+            <!-- Next essay (right side) -->
+            {% if next_essay %}
+                <div class="next-essay">
+                    <a href="{{ next_essay.url | relative_url }}">
+                        <strong>{{ next_essay.title }}</strong>
+                        <span class="arrow">›</span>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </article>
+
+<script>
+// Store all image paths for the slideshow
+let slideshowImages = [
+    {% assign image_files = site.static_files | where_exp: "item", "item.path contains page.url" %}
+    {% for image in image_files %}
+        {% assign ext = image.extname | downcase %}
+        {% if ext == '.jpg' or ext == '.jpeg' or ext == '.png' %}
+            "{{ image.path }}"{% unless forloop.last %},{% endunless %}
+        {% endif %}
+    {% endfor %}
+];
+
+let currentSlideIndex = 0;
+
+function openSlideshow(index) {
+    currentSlideIndex = index;
+    document.getElementById('slideshow-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    updateSlideshow();
+}
+
+function closeSlideshow() {
+    document.getElementById('slideshow-modal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+function changeSlide(direction) {
+    currentSlideIndex += direction;
+    
+    // Wrap around
+    if (currentSlideIndex >= slideshowImages.length) {
+        currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = slideshowImages.length - 1;
+    }
+    
+    updateSlideshow();
+}
+
+function updateSlideshow() {
+    const img = document.getElementById('slideshow-image');
+    const current = document.getElementById('slideshow-current');
+    const total = document.getElementById('slideshow-total');
+    
+    img.src = slideshowImages[currentSlideIndex];
+    current.textContent = currentSlideIndex + 1;
+    total.textContent = slideshowImages.length;
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('slideshow-modal');
+    if (modal.style.display === 'block') {
+        if (e.key === 'ArrowLeft') {
+            changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeSlide(1);
+        } else if (e.key === 'Escape') {
+            closeSlideshow();
+        }
+    }
+});
+
+// Close on background click
+document.getElementById('slideshow-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeSlideshow();
+    }
+});
+</script>
