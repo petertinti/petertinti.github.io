@@ -1,63 +1,139 @@
 # Peter Tinti Website
 
-This is Peter Tinti's personal website built with Jekyll and hosted on GitHub Pages.
+Personal portfolio website built with Jekyll and hosted on GitHub Pages.
 
-## For Peter: How to Update Your Website
+---
 
-### Adding New Blog Posts
-1. Create a new file in the `_posts/` folder
-2. Name it: `YYYY-MM-DD-your-post-title.md`
-3. Use this format:
-   ```
-   ---
-   layout: post
-   title: "Your Post Title"
-   date: 2024-01-15
-   author: Peter Tinti
-   description: "A brief description of your post"
-   tags: [photography, travel, example]
-   featured_image: "/assets/images/blog/your-featured-image.jpg"
-   ---
-   
-   Your post content here with **bold text**, *italics*, and images:
-   
-   ![Image description](/assets/images/blog/your-image.jpg)
-   ```
+## **Adding Photography Essays**
 
-### Adding Images to Blog Posts
-1. Save blog images in `assets/images/blog/`
-2. Use descriptive filenames like: `sample-featured.jpg`, `travel-sunset.png`
-3. Reference in posts: `/assets/images/blog/your-image.jpg`
-4. Supported formats: `.jpg`, `.png`, `.webp`
-5. Images get automatic styling (rounded corners, shadows, responsive sizing)
+### Quick Steps:
+1. **Create a folder** in `photography/` named after your essay  
+   Example: `photography/desert-journey/`
 
-### Adding New Photography Essays
-1. Create a new folder in `photography/` (e.g., `photography/my-new-essay/`)
-2. Drop your photos directly into that folder
-3. Create an `index.md` file in that folder with this content:
-   ```
+2. **Add your photos** to that folder  
+   Just drag and drop `.jpg`, `.JPG`, or `.png` files
+
+3. **Create `index.md`** in that folder with:
+   ```markdown
    ---
    layout: project
-   title: "my new essay"
-   essay_title: "my new essay"
+   title: "desert journey"
    order: 5
-   featured_image: "photo_001.jpg"
+   featured_image: "best-photo.jpg"
    ---
+   
+   Optional: Add text here describing the essay
    ```
-4. Change the `order` number to control where it appears (1 = first, 2 = second, etc.)
-5. Set `featured_image` to the filename of the photo you want on the main photography page
 
-### Editing Main Pages
-- Edit `index.markdown` for the homepage
-- Edit `contact.markdown` for the contact page
-- Edit `photography.markdown` if you need to change the photography landing page
+### Settings Explained:
+- **title**: Essay name (shown on photography page)
+- **order**: Display position (1 = first, 2 = second, etc.)
+- **featured_image**: Thumbnail photo filename for main gallery
 
-### Technical Files (Don't Edit)
-- `_config.yml` - Site configuration
+### Photo Tips:
+- Photos automatically display in a 2-column grid
+- Click any photo to open full-screen slideshow
+- Use arrow keys or click to navigate between photos
+
+---
+
+## **Adding Blog Posts**
+
+### Quick Steps:
+1. **Create a file** in `_posts/` folder  
+   Name format: `2024-01-15-my-post-title.md`
+
+2. **Add this header** to your file:
+   ```markdown
+   ---
+   layout: post
+   title: "My Amazing Post Title"
+   date: 2024-01-15
+   author: Peter Tinti
+   description: "A short summary of the post"
+   tags: [photography, travel, nature]
+   featured_image: "/photography/nature/sunset.jpg"
+   ---
+   
+   Write your post content here...
+   ```
+
+3. **Write your content** using:
+   - `**bold text**` for bold
+   - `*italic text*` for italics  
+   - `![Description](image-path)` for images
+   - `> Quote text` for blockquotes
+
+### Adding Images to Posts:
+
+**Option 1: Use existing photos**
+```markdown
+![Desert sunset](/photography/desert-journey/sunset.jpg)
+```
+
+**Option 2: Add new blog images**
+1. Save to `assets/images/blog/`
+2. Reference as: `![Description](/assets/images/blog/image.jpg)`
+
+### Image Features:
+- Click any image to view full-screen
+- Featured image appears at top of post
+- Content images display at 60% width (90% on mobile)
+
+---
+
+## **Editing Main Pages**
+
+| Page | File to Edit | Purpose |
+|------|-------------|---------|
+| Homepage | `index.markdown` | About text |
+| Contact | `contact.markdown` | Email address |
+| Photography | Don't edit | Auto-generated from essays |
+| Blog | Don't edit | Auto-generated from posts |
+
+---
+
+## **Publishing Changes**
+
+1. **Save your files** in the correct folders
+2. **Commit changes** to GitHub
+3. **Wait 2-3 minutes** for site to update
+4. Visit `petertinti.github.io` to see changes
+
+---
+
+## **Folder Structure**
+
+```
+petertinti.github.io/
+├── _posts/              ← Blog posts go here
+├── photography/         ← Photo essays go here
+│   ├── essay-name/
+│   │   ├── index.md
+│   │   └── photos.jpg
+├── assets/
+│   └── images/
+│       └── blog/       ← Blog-specific images
+├── index.markdown      ← Homepage content
+└── contact.markdown    ← Contact info
+```
+
+---
+
+## **Don't Edit These**
+
+- `_config.yml` - Site settings
 - `_layouts/` - Page templates
-- `_includes/` - Page components
-- `assets/` - Stylesheets and design
-- `_site/` - Auto-generated, don't touch
+- `_includes/` - Site components  
+- `assets/css/` - Styling
+- `_site/` - Auto-generated files
 
-## Development
-To run locally: `bundle exec jekyll serve --port 4000`
+---
+
+## **Local Development**
+
+To preview changes before publishing:
+```bash
+bundle exec jekyll serve --port 4000
+```
+Then visit: `http://localhost:4000`
