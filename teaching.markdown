@@ -11,4 +11,4 @@ I currently teach four graduate-level courses with the [Committee on Internation
 - Africa and the International System
 - International Migration
 
-If you are a current or prospective student in CIR/UChicago and would like to know more about these courses, please don't hesitate to send me an email at [ptinti@uchicago.edu](mailto:ptinti@uchicago.edu). I'm always happy to connect!
+If you are a current or prospective student and would like to know more about these courses, please don't hesitate to email me at [ptinti@uchicago.edu](mailto:ptinti@uchicago.edu). I'm always happy to connect!
