@@ -835,6 +835,7 @@ body.project .main-content {
   // Header adjustments
   .header-container {
     padding: 0 $spacing-md;
+    justify-content: space-between; // Push hamburger to the right on mobile
   }
   
   .site-title {
