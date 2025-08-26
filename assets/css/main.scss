@@ -60,7 +60,7 @@ p {
 }
 
 a {
-  color: #bbb; // Even lighter gray color
+  color: #666; // Darker gray color
   text-decoration: underline; // Underlined
   
   &:hover {
@@ -93,7 +93,8 @@ img {
   padding: 0 $page-padding;
   display: flex;
   align-items: center;
-  justify-content: space-between; // Push items to opposite ends
+  justify-content: flex-start; // Align items to the left
+  gap: $spacing-lg; // Add space between title and nav
 }
 
 .site-title {
@@ -235,7 +236,7 @@ img {
   margin: 0 auto;
   padding: $spacing-xl $page-padding;
   
-  // More space from header for home page, blog pages, and photo page
+  // More space from header for home page, blog pages, photo page, and teaching page
   &[data-page="home"] {
     padding-top: 120px; // More space from header
   }
@@ -247,6 +248,10 @@ img {
   &[data-page="photography"] {
     padding-top: 120px; // More space from header
   }
+  
+  &[data-page="teaching"] {
+    padding-top: 120px; // More space from header
+  }
 }
 
 .content-container {
@@ -255,8 +260,8 @@ img {
   padding: $spacing-xl $page-padding;
 }
 
-// About page content (homepage) - centered and larger text
-.about-content, .main-content[data-page="home"] {
+// About page content (homepage) and Teaching page - centered and larger text
+.about-content, .main-content[data-page="home"], .main-content[data-page="teaching"] {
   max-width: 720px; // Slightly wider text
   margin: 0 auto; // Center the content block
   text-align: left; // Keep text left-aligned within the centered block
@@ -269,6 +274,17 @@ img {
     font-size: 16px; // Larger text
     line-height: 1.7; // Better line spacing
     margin-bottom: $spacing-lg; // More space between paragraphs
+  }
+  
+  ul {
+    font-size: 16px; // Larger text for list items
+    line-height: 1.7; // Better line spacing
+    margin-bottom: $spacing-lg; // More space after lists
+    padding-left: $spacing-lg; // Indent for list items
+    
+    li {
+      margin-bottom: $spacing-sm; // Space between list items
+    }
   }
 }
 
