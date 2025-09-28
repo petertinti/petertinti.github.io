@@ -18,6 +18,7 @@ Personal portfolio website built with Jekyll and hosted on GitHub Pages.
    ---
    layout: project
    title: "desert journey"
+   essay_title: "desert journey"
    order: 5
    featured_image: "best-photo.jpg"
    ---
@@ -26,7 +27,8 @@ Personal portfolio website built with Jekyll and hosted on GitHub Pages.
    ```
 
 ### Settings Explained:
-- **title**: Essay name (shown on photography page)
+- **title**: Essay name (used for page title)
+- **essay_title**: Essay name (shown on photography page)
 - **order**: Display position (1 = first, 2 = second, etc.)
 - **featured_image**: Thumbnail photo filename for main gallery
 
