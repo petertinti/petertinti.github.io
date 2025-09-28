@@ -1,5 +1,5 @@
 ---
 layout: project
-title: "american west"
+essay_title: "american west"
 order: 5
 ---
